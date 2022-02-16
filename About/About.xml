@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>Better Jump Pack (Continued)</name>
   <packageId>Mlie.BetterJumpPack</packageId>
@@ -25,11 +25,11 @@
     <li>brrainz.harmony</li>
     <li>Ludeon.Rimworld.Royalty</li>
   </loadAfter>
-  <description>[img]https://i.imgur.com/WAEzk68.png[/img]
+  <description>[img]https://i.imgur.com/buuPQel.png[/img]
 Update of YAYOs mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2242175972
 
-[img]https://i.imgur.com/7Gzt3Rg.png[/img]
+[img]https://i.imgur.com/pufA0kM.png[/img]
 
 [table]
     [tr]
@@ -38,7 +38,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2242175972
     [/tr]
 [/table]
 	
-[img]https://i.imgur.com/NOW7jU1.png[/img]
+[img]https://i.imgur.com/Z4GOv8H.png[/img]
 [img]https://imgur.com/I3WPUFI.gif[/img]
 
 - Allows jump packs to cross walls, break roof and fall.
@@ -58,11 +58,11 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2242175972
 
 
 [b]Please take my mod and modify it.
-I&apos;d love to see variations come out with various ideas.
-I&apos;m a game designer, and I haven&apos;t implemented many ideas yet due to lack of time.
+I'd love to see variations come out with various ideas.
+I'm a game designer, and I haven't implemented many ideas yet due to lack of time.
 If you are proficient in C# and are interested, please contact me on the rimworld discord.[/b]
 
-[img]https://i.imgur.com/Rs6T6cr.png[/img]
+[img]https://i.imgur.com/PwoNOj4.png[/img]
 [list]
 [*] See if the the error persists if you just have this mod and its requirements active.
 [*] If not, try adding your other mods until it happens again.
@@ -73,4 +73,3 @@ If you are proficient in C# and are interested, please contact me on the rimworl
 [/list]
 </description>
 </ModMetaData>
-

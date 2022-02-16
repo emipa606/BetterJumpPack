@@ -1,14 +1,14 @@
 # BetterJumpPack
 
-![Image](https://i.imgur.com/WAEzk68.png)
+![Image](https://i.imgur.com/buuPQel.png)
 
 Update of YAYOs mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2242175972
 
-![Image](https://i.imgur.com/7Gzt3Rg.png)
+![Image](https://i.imgur.com/pufA0kM.png)
 
 	
-![Image](https://i.imgur.com/NOW7jU1.png)
+![Image](https://i.imgur.com/Z4GOv8H.png)
 
 ![Image](https://imgur.com/I3WPUFI.gif)
 
@@ -31,11 +31,11 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2242175972
 
 
 **Please take my mod and modify it.
-I&apos;d love to see variations come out with various ideas.
-I&apos;m a game designer, and I haven&apos;t implemented many ideas yet due to lack of time.
+I'd love to see variations come out with various ideas.
+I'm a game designer, and I haven't implemented many ideas yet due to lack of time.
 If you are proficient in C# and are interested, please contact me on the rimworld discord.**
 
-![Image](https://i.imgur.com/Rs6T6cr.png)
+![Image](https://i.imgur.com/PwoNOj4.png)
 
 
 
