@@ -45,14 +45,14 @@ public static class patch_PawnFlyer_MakeFlyer
 
         if (Traverse.Create(tmp_pawnFlyer).Field("pawnWasDrafted").GetValue<bool>())
         {
-            Find.Selector.ShelveSelected(pawn);
+            Find.Selector.Deselect(pawn);
         }
 
         Traverse.Create(tmp_pawnFlyer).Field("jobQueue").SetValue(pawn.jobs.CaptureAndClearJobQueue());
         pawn.DeSpawn();
         if (!Traverse.Create(tmp_pawnFlyer).Field("innerContainer").GetValue<ThingOwner<Thing>>().TryAdd(pawn))
         {
-            Log.Error("Could not add " + pawn.ToStringSafe() + " to a flyer.");
+            Log.Error($"Could not add {pawn.ToStringSafe()} to a flyer.");
             pawn.Destroy();
         }
 

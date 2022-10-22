@@ -4,8 +4,8 @@ using Verse;
 
 namespace betterJumpPack;
 
-[HarmonyPatch(typeof(Verb_Jump), "ValidJumpTarget")]
-public static class patch_Verb_Jump_ValidJumpTarget
+[HarmonyPatch(typeof(JumpUtility), "ValidJumpTarget")]
+public static class patch_JumpUtility_ValidJumpTarget
 {
     [HarmonyPostfix]
     private static bool Prefix(ref bool __result, Map map, IntVec3 cell)
@@ -18,7 +18,7 @@ public static class patch_Verb_Jump_ValidJumpTarget
         }
 
         var edifice = cell.GetEdifice(map);
-        __result = edifice == null || !(edifice is Building_Door buildingDoor) || buildingDoor.Open;
+        __result = edifice is not Building_Door buildingDoor || buildingDoor.Open;
         return false;
     }
 }
