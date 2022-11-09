@@ -1,23 +1,20 @@
-﻿using System.Reflection;
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using Verse;
+using Verse.AI;
 
 namespace betterJumpPack;
 
 [HarmonyPatch(typeof(PawnFlyer), "MakeFlyer")]
 public static class patch_PawnFlyer_MakeFlyer
 {
-    private static MethodInfo a_ValidateFlyer = AccessTools.Method(typeof(PawnFlyer), "ValidateFlyer");
-
-
     [HarmonyPostfix]
     private static bool Prefix(ref PawnFlyer __result, ThingDef flyingDef, Pawn pawn,
-        IntVec3 destCell)
+        IntVec3 destCell, EffecterDef flightEffecterDef, SoundDef landingSound, bool flyWithCarriedThing)
     {
         var tmp_pawnFlyer = (PawnFlyer)ThingMaker.MakeThing(flyingDef);
 
-        if (!(bool)AccessTools.Method(typeof(PawnFlyer), "ValidateFlyer").Invoke(tmp_pawnFlyer, null))
+        if (!tmp_pawnFlyer.ValidateFlyer())
         {
             __result = null;
             return false;
@@ -38,26 +35,57 @@ public static class patch_PawnFlyer_MakeFlyer
             }
         }
 
-        Traverse.Create(tmp_pawnFlyer).Field("startVec").SetValue(pawn.TrueCenter());
-        Traverse.Create(tmp_pawnFlyer).Field("flightDistance").SetValue(pawn.Position.DistanceTo(destCell));
-        Traverse.Create(tmp_pawnFlyer).Field("pawnWasDrafted").SetValue(pawn.Drafted);
-        Traverse.Create(tmp_pawnFlyer).Field("pawnWasSelected").SetValue(Find.Selector.IsSelected(pawn));
+        tmp_pawnFlyer.startVec = pawn.TrueCenter();
+        tmp_pawnFlyer.flightDistance = pawn.Position.DistanceTo(destCell);
+        tmp_pawnFlyer.pawnWasDrafted = pawn.Drafted;
+        tmp_pawnFlyer.flightEffecterDef = flightEffecterDef;
+        tmp_pawnFlyer.soundLanding = landingSound;
 
-        if (Traverse.Create(tmp_pawnFlyer).Field("pawnWasDrafted").GetValue<bool>())
+        if (tmp_pawnFlyer.pawnWasDrafted)
         {
             Find.Selector.Deselect(pawn);
         }
 
-        Traverse.Create(tmp_pawnFlyer).Field("jobQueue").SetValue(pawn.jobs.CaptureAndClearJobQueue());
-        pawn.DeSpawn();
-        if (!Traverse.Create(tmp_pawnFlyer).Field("innerContainer").GetValue<ThingOwner<Thing>>().TryAdd(pawn))
+        if (pawn.drafter != null)
+        {
+            tmp_pawnFlyer.pawnCanFireAtWill = pawn.drafter.FireAtWill;
+        }
+
+        if (pawn.CurJob != null)
+        {
+            if (pawn.CurJob.def == JobDefOf.CastJump)
+            {
+                pawn.jobs.EndCurrentJob(JobCondition.Succeeded);
+            }
+            else
+            {
+                pawn.jobs.SuspendCurrentJob(JobCondition.InterruptForced);
+            }
+        }
+
+        tmp_pawnFlyer.jobQueue = pawn.jobs.CaptureAndClearJobQueue();
+        if (flyWithCarriedThing && pawn.carryTracker.CarriedThing != null &&
+            pawn.carryTracker.TryDropCarriedThing(pawn.Position, ThingPlaceMode.Direct, out tmp_pawnFlyer.carriedThing))
+        {
+            tmp_pawnFlyer.carriedThing.holdingOwner?.Remove(tmp_pawnFlyer.carriedThing);
+
+            tmp_pawnFlyer.carriedThing.DeSpawn();
+        }
+
+        pawn.DeSpawn(DestroyMode.WillReplace);
+
+        if (!tmp_pawnFlyer.innerContainer.TryAdd(pawn))
         {
             Log.Error($"Could not add {pawn.ToStringSafe()} to a flyer.");
             pawn.Destroy();
         }
 
-        __result = tmp_pawnFlyer;
+        if (tmp_pawnFlyer.carriedThing != null && !tmp_pawnFlyer.innerContainer.TryAdd(tmp_pawnFlyer.carriedThing))
+        {
+            Log.Error($"Could not add {tmp_pawnFlyer.carriedThing.ToStringSafe()} to a flyer.");
+        }
 
+        __result = tmp_pawnFlyer;
 
         return false;
     }

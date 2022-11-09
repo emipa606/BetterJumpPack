@@ -1,5 +1,8 @@
 # Changelog for BetterJumpPack
 
+1.4.2 - Pawns can now rescue pawns correctly
+
+
 1.4.1 - Mod updated for 1.4 and passed autotests
 
 
