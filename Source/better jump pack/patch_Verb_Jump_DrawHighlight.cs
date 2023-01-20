@@ -11,8 +11,8 @@ public static class patch_Verb_Jump_DrawHighlight
     [HarmonyPostfix]
     private static bool Prefix(Verb_Jump __instance, LocalTargetInfo target)
     {
-        // Vanilla Expanded Jump
-        if (__instance.verbProps.verbClass.FullName != null && __instance.verbProps.verbClass.FullName.Contains("MVCF"))
+        if (__instance.EquipmentSource?.def == null ||
+            __instance.EquipmentSource.def.StatBaseDefined(StatDefOf.JumpRange))
         {
             return true;
         }

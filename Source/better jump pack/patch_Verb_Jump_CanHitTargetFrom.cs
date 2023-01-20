@@ -10,8 +10,8 @@ public static class patch_Verb_Jump_CanHitTargetFrom
     [HarmonyPostfix]
     private static bool Prefix(ref bool __result, Verb_Jump __instance, IntVec3 root, LocalTargetInfo targ)
     {
-        // Vanilla Expanded Jump
-        if (__instance.verbProps.verbClass.FullName != null && __instance.verbProps.verbClass.FullName.Contains("MVCF"))
+        if (__instance.EquipmentSource?.def == null ||
+            __instance.EquipmentSource.def.StatBaseDefined(StatDefOf.JumpRange))
         {
             return true;
         }

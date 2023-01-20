@@ -1,5 +1,8 @@
 # Changelog for BetterJumpPack
 
+1.4.3 - Fixed the check for the updated MVCF-implementation
+
+
 1.4.2 - Pawns can now rescue pawns correctly
 
 
