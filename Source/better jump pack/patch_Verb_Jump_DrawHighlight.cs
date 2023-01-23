@@ -12,7 +12,7 @@ public static class patch_Verb_Jump_DrawHighlight
     private static bool Prefix(Verb_Jump __instance, LocalTargetInfo target)
     {
         if (__instance.EquipmentSource?.def == null ||
-            __instance.EquipmentSource.def.StatBaseDefined(StatDefOf.JumpRange))
+            !__instance.EquipmentSource.def.StatBaseDefined(StatDefOf.JumpRange))
         {
             return true;
         }

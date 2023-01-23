@@ -11,7 +11,7 @@ public static class patch_Verb_Jump_CanHitTargetFrom
     private static bool Prefix(ref bool __result, Verb_Jump __instance, IntVec3 root, LocalTargetInfo targ)
     {
         if (__instance.EquipmentSource?.def == null ||
-            __instance.EquipmentSource.def.StatBaseDefined(StatDefOf.JumpRange))
+            !__instance.EquipmentSource.def.StatBaseDefined(StatDefOf.JumpRange))
         {
             return true;
         }
