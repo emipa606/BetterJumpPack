@@ -1,5 +1,8 @@
 # Changelog for BetterJumpPack
 
+1.4.5 - Paramedic mechs should no longer jump under overhead-mountain and killing themselves
+
+
 1.4.4 - Fixed the bug in the last update
 
 
