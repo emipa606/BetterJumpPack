@@ -27,32 +27,6 @@ public class betterJumpPack : ModBase
     {
         var map = searcher.Map;
 
-        bool Predicate(IntVec3 c)
-        {
-            if (cellValidator != null && !cellValidator(c))
-            {
-                return false;
-            }
-
-            if (!map.pawnDestinationReservationManager.CanReserve(c, searcher, true) || !c.Standable(map))
-            {
-                return false;
-            }
-
-            var thingList = c.GetThingList(map);
-            foreach (var thing in thingList)
-            {
-                if (thing is Pawn pawn && pawn != searcher && pawn.RaceProps.Humanlike &&
-                    (searcher.Faction == Faction.OfPlayer && pawn.Faction == searcher.Faction ||
-                     searcher.Faction != Faction.OfPlayer && pawn.Faction != Faction.OfPlayer))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         if (Predicate(root))
         {
             return root;
@@ -86,5 +60,31 @@ public class betterJumpPack : ModBase
         } while (radius < cellsInRadius);
 
         return searcher.Position;
+
+        bool Predicate(IntVec3 c)
+        {
+            if (cellValidator != null && !cellValidator(c))
+            {
+                return false;
+            }
+
+            if (!map.pawnDestinationReservationManager.CanReserve(c, searcher, true) || !c.Standable(map))
+            {
+                return false;
+            }
+
+            var thingList = c.GetThingList(map);
+            foreach (var thing in thingList)
+            {
+                if (thing is Pawn pawn && pawn != searcher && pawn.RaceProps.Humanlike &&
+                    (searcher.Faction == Faction.OfPlayer && pawn.Faction == searcher.Faction ||
+                     searcher.Faction != Faction.OfPlayer && pawn.Faction != Faction.OfPlayer))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

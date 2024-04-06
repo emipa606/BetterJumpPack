@@ -5,7 +5,7 @@ using Verse;
 namespace betterJumpPack;
 
 // 도착지점 강제 제한
-[HarmonyPatch(typeof(Verb_Jump), "OrderForceTarget")]
+[HarmonyPatch(typeof(Verb_Jump), nameof(Verb_Jump.OrderForceTarget))]
 public static class patch_Verb_Jump_OrderForceTarget
 {
     [HarmonyPostfix]
@@ -23,11 +23,11 @@ public static class patch_Verb_Jump_OrderForceTarget
 
         FleckMaker.Static(cell, map, FleckDefOf.FeedbackGoto);
 
+        return false;
+
         bool AcceptableDestination(IntVec3 c)
         {
             return __instance.CanHitTargetFrom(__instance.caster.Position, c);
         }
-
-        return false;
     }
 }

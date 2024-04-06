@@ -4,7 +4,7 @@ using Verse;
 
 namespace betterJumpPack;
 
-[HarmonyPatch(typeof(JumpUtility), "CanHitTargetFrom")]
+[HarmonyPatch(typeof(JumpUtility), nameof(JumpUtility.CanHitTargetFrom))]
 public static class patch_JumpUtility_CanHitTargetFrom
 {
     [HarmonyPostfix]

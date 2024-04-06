@@ -9,7 +9,6 @@ public static class HarmonyPatches
 {
     static HarmonyPatches()
     {
-        var harmony = new Harmony("com.yayo.BetterJumpPack");
-        harmony.PatchAll(Assembly.GetExecutingAssembly());
+        new Harmony("com.yayo.BetterJumpPack").PatchAll(Assembly.GetExecutingAssembly());
     }
 }

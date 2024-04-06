@@ -5,7 +5,7 @@ using Verse;
 
 namespace betterJumpPack;
 
-[HarmonyPatch(typeof(Verb_Jump), "DrawHighlight")]
+[HarmonyPatch(typeof(Verb_Jump), nameof(Verb_Jump.DrawHighlight))]
 public static class patch_Verb_Jump_DrawHighlight
 {
     [HarmonyPostfix]

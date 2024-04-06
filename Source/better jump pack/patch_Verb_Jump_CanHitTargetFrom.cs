@@ -3,7 +3,7 @@ using RimWorld;
 
 namespace betterJumpPack;
 
-[HarmonyPatch(typeof(Verb_Jump), "CanHitTargetFrom")]
+[HarmonyPatch(typeof(Verb_Jump), nameof(Verb_Jump.CanHitTargetFrom))]
 public static class patch_Verb_Jump_CanHitTargetFrom
 {
     [HarmonyPostfix]

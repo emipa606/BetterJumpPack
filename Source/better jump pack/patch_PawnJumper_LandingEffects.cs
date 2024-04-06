@@ -4,11 +4,11 @@ using Verse;
 
 namespace betterJumpPack;
 
-[HarmonyPatch(typeof(PawnJumper), "LandingEffects")]
-public static class patch_PawnJumper_LandingEffects
+[HarmonyPatch(typeof(PawnFlyer), nameof(PawnFlyer.LandingEffects))]
+public static class patch_PawnFlyer_LandingEffects
 {
     [HarmonyPostfix]
-    private static bool Prefix(PawnJumper __instance)
+    private static bool Prefix(PawnFlyer __instance)
     {
         var c = __instance.DestinationPos.ToIntVec3();
 
