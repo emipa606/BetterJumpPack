@@ -8,7 +8,7 @@ namespace betterJumpPack;
 public static class patch_PawnFlyer_MakeFlyer
 {
     [HarmonyPostfix]
-    private static bool Prefix(Pawn pawn, IntVec3 destCell)
+    private static bool Prefix(Pawn pawn, IntVec3 destCell, ThingDef flyingDef)
     {
         if (destCell.Fogged(pawn.Map))
         {
@@ -21,7 +21,9 @@ public static class patch_PawnFlyer_MakeFlyer
             return true;
         }
 
-        RoofCollapserImmediate.DropRoofInCells(pawn.Position, pawn.Map);
+        // (Blame Thathitmann) only does roof collapse if it's not the devourer leap or fleshbeast explosion
+        if (flyingDef != ThingDefOf.PawnFlyer_Stun && flyingDef != ThingDefOf.PawnFlyer_ConsumeLeap) RoofCollapserImmediate.DropRoofInCells(pawn.Position, pawn.Map);
+        
         return !pawn.Dead;
     }
 }
