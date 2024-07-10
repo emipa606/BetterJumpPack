@@ -5,9 +5,8 @@ using Verse;
 namespace betterJumpPack;
 
 [HarmonyPatch(typeof(JumpUtility), nameof(JumpUtility.ValidJumpTarget))]
-public static class patch_JumpUtility_ValidJumpTarget
+public static class JumpUtility_ValidJumpTarget
 {
-    [HarmonyPostfix]
     private static void Postfix(ref bool __result, Map map, IntVec3 cell)
     {
         if (__result)

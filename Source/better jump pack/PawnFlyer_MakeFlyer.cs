@@ -5,9 +5,8 @@ using Verse;
 namespace betterJumpPack;
 
 [HarmonyPatch(typeof(PawnFlyer), nameof(PawnFlyer.MakeFlyer))]
-public static class patch_PawnFlyer_MakeFlyer
+public static class PawnFlyer_MakeFlyer
 {
-    [HarmonyPostfix]
     private static bool Prefix(Pawn pawn, IntVec3 destCell, ThingDef flyingDef)
     {
         if (destCell.Fogged(pawn.Map))
@@ -22,8 +21,11 @@ public static class patch_PawnFlyer_MakeFlyer
         }
 
         // (Blame Thathitmann) only does roof collapse if it's not the devourer leap or fleshbeast explosion
-        if (flyingDef != ThingDefOf.PawnFlyer_Stun && flyingDef != ThingDefOf.PawnFlyer_ConsumeLeap) RoofCollapserImmediate.DropRoofInCells(pawn.Position, pawn.Map);
-        
+        if (flyingDef != ThingDefOf.PawnFlyer_Stun && flyingDef != ThingDefOf.PawnFlyer_ConsumeLeap)
+        {
+            RoofCollapserImmediate.DropRoofInCells(pawn.Position, pawn.Map);
+        }
+
         return !pawn.Dead;
     }
 }

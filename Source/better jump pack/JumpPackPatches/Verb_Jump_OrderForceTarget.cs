@@ -5,11 +5,10 @@ using Verse;
 namespace betterJumpPack;
 
 // 도착지점 강제 제한
-[HarmonyPatch(typeof(Verb_CastAbilityJump), nameof(Verb_CastAbilityJump.OrderForceTarget))]
-public static class patch_Verb_CastAbilityJump_OrderForceTarget
+[HarmonyPatch(typeof(Verb_Jump), nameof(Verb_Jump.OrderForceTarget))]
+public static class Verb_Jump_OrderForceTarget
 {
-    [HarmonyPostfix]
-    private static bool Prefix(Verb_CastAbilityJump __instance, LocalTargetInfo target)
+    private static bool Prefix(Verb_Jump __instance, LocalTargetInfo target)
     {
         var map = __instance.CasterPawn.Map;
         var cell = betterJumpPack.BestOrderedGotoDestNear_NewTemp(target.Cell, __instance.CasterPawn,
@@ -18,7 +17,6 @@ public static class patch_Verb_CastAbilityJump_OrderForceTarget
         job.verbToUse = __instance;
         if (!__instance.CasterPawn.jobs.TryTakeOrderedJob(job))
         {
-            Log.Message("Failed to do job");
             return false;
         }
 
@@ -30,7 +28,5 @@ public static class patch_Verb_CastAbilityJump_OrderForceTarget
         {
             return __instance.CanHitTargetFrom(__instance.caster.Position, c);
         }
-
-        //return true;
     }
 }

@@ -1,24 +1,22 @@
-﻿using System.Linq;
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace betterJumpPack;
 
-[HarmonyPatch(typeof(Verb_CastAbilityJump), nameof(Verb_CastAbilityJump.DrawHighlight))]
-public static class patch_Verb_CastAbilityJump_DrawHighlight
+[HarmonyPatch(typeof(Verb_Jump), nameof(Verb_Jump.DrawHighlight))]
+public static class Verb_Jump_DrawHighlight
 {
-    [HarmonyPostfix]
-    private static bool Prefix(Verb_CastAbilityJump __instance, LocalTargetInfo target)
+    private static bool Prefix(Verb_Jump __instance, LocalTargetInfo target)
     {
-        if (__instance.Ability?.VerbProperties?.FirstOrFallback()?.range == null)
+        if (__instance.EquipmentSource?.def == null ||
+            !__instance.EquipmentSource.def.StatBaseDefined(StatDefOf.JumpRange))
         {
-            Log.Message("Something fucked up");
             return true;
         }
 
-        var effectiveRange = __instance.Ability.VerbProperties.FirstOrFallback().range;
+        var effectiveRange = __instance.EquipmentSource.GetStatValue(StatDefOf.JumpRange);
 
 
         var t = __instance.caster;

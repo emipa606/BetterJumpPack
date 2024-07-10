@@ -4,9 +4,8 @@ using RimWorld;
 namespace betterJumpPack;
 
 [HarmonyPatch(typeof(Verb_Jump), nameof(Verb_Jump.CanHitTargetFrom))]
-public static class patch_Verb_Jump_CanHitTargetFrom
+public static class Verb_Jump_CanHitTargetFrom
 {
-    [HarmonyPostfix]
     private static void Prefix(Verb_Jump __instance, ref float ___cachedEffectiveRange)
     {
         if (__instance.EquipmentSource?.def == null ||

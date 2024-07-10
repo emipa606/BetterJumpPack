@@ -5,9 +5,8 @@ using Verse;
 namespace betterJumpPack;
 
 [HarmonyPatch(typeof(JumpUtility), nameof(JumpUtility.CanHitTargetFrom))]
-public static class patch_JumpUtility_CanHitTargetFrom
+public static class JumpUtility_CanHitTargetFrom
 {
-    [HarmonyPostfix]
     private static bool Prefix(ref bool __result, Pawn pawn, IntVec3 root, LocalTargetInfo targ, float range)
     {
         var num = range * range;
