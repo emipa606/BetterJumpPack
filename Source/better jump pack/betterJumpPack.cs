@@ -10,7 +10,6 @@ public class betterJumpPack : ModBase
 {
     public override string ModIdentifier => "betterJumpPack";
 
-
     public override void DefsLoaded()
     {
         foreach (var t in from thing in DefDatabase<ThingDef>.AllDefs
@@ -27,7 +26,7 @@ public class betterJumpPack : ModBase
     {
         var map = searcher.Map;
 
-        if (Predicate(root))
+        if (predicate(root))
         {
             return root;
         }
@@ -40,7 +39,7 @@ public class betterJumpPack : ModBase
         do
         {
             var intVec = root + GenRadial.RadialPattern[radius];
-            if (Predicate(intVec))
+            if (predicate(intVec))
             {
                 var coverScore = CoverUtility.TotalSurroundingCoverScore(intVec, map);
                 if (coverScore > highestCover)
@@ -61,7 +60,7 @@ public class betterJumpPack : ModBase
 
         return searcher.Position;
 
-        bool Predicate(IntVec3 c)
+        bool predicate(IntVec3 c)
         {
             if (cellValidator != null && !cellValidator(c))
             {

@@ -8,7 +8,7 @@ namespace betterJumpPack;
 [HarmonyPatch(typeof(Verb_CastAbilityJump), nameof(Verb_CastAbilityJump.DrawHighlight))]
 public static class Verb_CastAbilityJump_DrawHighlight
 {
-    private static bool Prefix(Verb_CastAbilityJump __instance, LocalTargetInfo target)
+    private static bool Prefix(Verb_CastAbilityJump __instance, LocalTargetInfo target, Thing ___caster)
     {
         if (__instance.Ability?.VerbProperties?.FirstOrFallback()?.range == null)
         {
@@ -24,13 +24,13 @@ public static class Verb_CastAbilityJump_DrawHighlight
         var cell = t.Position;
         var canJump = !cell.Roofed(m) || !cell.GetRoof(m).isThickRoof && !cell.GetRoof(m).isNatural;
 
-        if (target.IsValid && JumpUtility.ValidJumpTarget(__instance.caster.Map, target.Cell))
+        if (target.IsValid && JumpUtility.ValidJumpTarget(___caster, __instance.caster.Map, target.Cell))
         {
             GenDraw.DrawTargetHighlightWithLayer(target.CenterVector3, AltitudeLayer.MetaOverlays);
         }
 
         GenDraw.DrawRadiusRing(__instance.caster.Position, effectiveRange, Color.white
-            , c => canJump && JumpUtility.ValidJumpTarget(__instance.caster.Map, c));
+            , c => canJump && JumpUtility.ValidJumpTarget(___caster, __instance.caster.Map, c));
 
         return false;
     }

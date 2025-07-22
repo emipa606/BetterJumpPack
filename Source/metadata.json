@@ -2,6 +2,14 @@
   "Continued": true,
   "CanAdd": "0",
   "CanRemove": "2",
-  "PreviewVersion": "1.5",
-  "SocialImageSet": true
+  "PreviewVersion": "1.6",
+  "SocialImageSet": true,
+  "Patches": true,
+  "Defs": false,
+  "Assemblies": true,
+  "LinesOfCode": 12612,
+  "LinesOfXML": 523,
+  "CodeBaseSize": 65,
+  "LastXmlCleaning": "2025-07-22T22:44:58.2541358+02:00",
+  "SearchTags": " mountain jumping"
 }

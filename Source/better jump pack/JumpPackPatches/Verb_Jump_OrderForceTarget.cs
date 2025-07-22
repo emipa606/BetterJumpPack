@@ -12,7 +12,7 @@ public static class Verb_Jump_OrderForceTarget
     {
         var map = __instance.CasterPawn.Map;
         var cell = betterJumpPack.BestOrderedGotoDestNear_NewTemp(target.Cell, __instance.CasterPawn,
-            AcceptableDestination);
+            acceptableDestination);
         var job = JobMaker.MakeJob(JobDefOf.CastJump, cell);
         job.verbToUse = __instance;
         if (!__instance.CasterPawn.jobs.TryTakeOrderedJob(job))
@@ -24,7 +24,7 @@ public static class Verb_Jump_OrderForceTarget
 
         return false;
 
-        bool AcceptableDestination(IntVec3 c)
+        bool acceptableDestination(IntVec3 c)
         {
             return __instance.CanHitTargetFrom(__instance.caster.Position, c);
         }

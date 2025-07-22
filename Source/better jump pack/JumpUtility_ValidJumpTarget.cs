@@ -25,7 +25,7 @@ public static class JumpUtility_ValidJumpTarget
         }
 
         var edifice = cell.GetEdifice(map);
-        Building_Door building_Door;
-        __result = edifice == null || (building_Door = edifice as Building_Door) == null || building_Door.Open;
+        Building_Door buildingDoor;
+        __result = edifice == null || (buildingDoor = edifice as Building_Door) == null || buildingDoor.Open;
     }
 }
