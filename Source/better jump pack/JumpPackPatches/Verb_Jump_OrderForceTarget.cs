@@ -8,7 +8,7 @@ namespace betterJumpPack;
 [HarmonyPatch(typeof(Verb_Jump), nameof(Verb_Jump.OrderForceTarget))]
 public static class Verb_Jump_OrderForceTarget
 {
-    private static bool Prefix(Verb_Jump __instance, LocalTargetInfo target)
+    public static bool Prefix(Verb_Jump __instance, LocalTargetInfo target)
     {
         var map = __instance.CasterPawn.Map;
         var cell = BetterJumpPackUtility.BestOrderedGotoDestNear(
@@ -17,7 +17,7 @@ public static class Verb_Jump_OrderForceTarget
             acceptableDestination);
         var job = JobMaker.MakeJob(JobDefOf.CastJump, cell);
         job.verbToUse = __instance;
-        if(!__instance.CasterPawn.jobs.TryTakeOrderedJob(job))
+        if (!__instance.CasterPawn.jobs.TryTakeOrderedJob(job))
         {
             return false;
         }
@@ -26,6 +26,9 @@ public static class Verb_Jump_OrderForceTarget
 
         return false;
 
-        bool acceptableDestination(IntVec3 c) { return __instance.CanHitTargetFrom(__instance.caster.Position, c); }
+        bool acceptableDestination(IntVec3 c)
+        {
+            return __instance.CanHitTargetFrom(__instance.caster.Position, c);
+        }
     }
 }

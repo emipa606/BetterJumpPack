@@ -1,5 +1,5 @@
-﻿using RimWorld;
-using System;
+﻿using System;
+using RimWorld;
 using Verse;
 
 namespace betterJumpPack;
@@ -10,8 +10,10 @@ public static class BetterJumpPackUtility
     {
         var map = searcher.Map;
 
-        if(predicate(root))
+        if (predicate(root))
+        {
             return root;
+        }
 
         var radius = 1;
         var result = default(IntVec3);
@@ -22,10 +24,10 @@ public static class BetterJumpPackUtility
         do
         {
             var intVec = root + GenRadial.RadialPattern[radius];
-            if(predicate(intVec))
+            if (predicate(intVec))
             {
                 var coverScore = CoverUtility.TotalSurroundingCoverScore(intVec, map);
-                if(coverScore > highestCover)
+                if (coverScore > highestCover)
                 {
                     highestCover = coverScore;
                     result = intVec;
@@ -33,8 +35,10 @@ public static class BetterJumpPackUtility
                 }
             }
 
-            if(radius >= 8 && hasCover)
+            if (radius >= 8 && hasCover)
+            {
                 return result;
+            }
 
             radius++;
         } while (radius < cellsInRadius);
@@ -43,23 +47,27 @@ public static class BetterJumpPackUtility
 
         bool predicate(IntVec3 c)
         {
-            if(cellValidator != null && !cellValidator(c))
+            if (cellValidator != null && !cellValidator(c))
+            {
                 return false;
+            }
 
-            if(!map.pawnDestinationReservationManager.CanReserve(c, searcher, true) || !c.Standable(map))
+            if (!map.pawnDestinationReservationManager.CanReserve(c, searcher, true) || !c.Standable(map))
+            {
                 return false;
+            }
 
             var thingList = c.GetThingList(map);
-            foreach(var thing in thingList)
+            foreach (var thing in thingList)
             {
-                if(thing is Pawn pawn &&
+                if (thing is Pawn pawn &&
                     pawn != searcher &&
                     pawn.RaceProps.Humanlike &&
                     (
-                            // Player pawn standing in player square
-                            (searcher.Faction == Faction.OfPlayer && pawn.Faction == searcher.Faction) ||
+                        // Player pawn standing in player square
+                        searcher.Faction == Faction.OfPlayer && pawn.Faction == searcher.Faction ||
                         // Non-player pawn in non-player pawn square
-                        (searcher.Faction != Faction.OfPlayer && pawn.Faction != Faction.OfPlayer)))
+                        searcher.Faction != Faction.OfPlayer && pawn.Faction != Faction.OfPlayer))
                 {
                     return false;
                 }

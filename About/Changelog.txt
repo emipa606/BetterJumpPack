@@ -1,5 +1,8 @@
 # Changelog for BetterJumpPack
 
+1.7.0 - Mod updated for 1.7 and passed autotests
+
+
 1.6.2 - Removed the need for HugsLib, thanks to Zaljerem!
 
 

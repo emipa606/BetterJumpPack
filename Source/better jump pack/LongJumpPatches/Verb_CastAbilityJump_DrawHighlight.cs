@@ -8,15 +8,16 @@ namespace betterJumpPack;
 [HarmonyPatch(typeof(Verb_CastAbilityJump), nameof(Verb_CastAbilityJump.DrawHighlight))]
 public static class Verb_CastAbilityJump_DrawHighlight
 {
-    private static bool Prefix(Verb_CastAbilityJump __instance, LocalTargetInfo target, Thing ___caster)
+    public static bool Prefix(Verb_CastAbilityJump __instance, LocalTargetInfo target, Thing ___caster)
     {
-        if (__instance.Ability?.VerbProperties?.FirstOrFallback()?.range == null)
+        var firstOrFallback = __instance.Ability?.VerbProperties?.FirstOrFallback();
+        if (firstOrFallback?.range == null)
         {
             Log.Message("[betterJumpPack]: Something went wrong");
             return true;
         }
 
-        var effectiveRange = __instance.Ability.VerbProperties.FirstOrFallback().range;
+        var effectiveRange = firstOrFallback.range;
 
         var t = __instance.caster;
         var m = t.Map;

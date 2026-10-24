@@ -12,13 +12,13 @@ public static class PawnFlyer_LandingEffects
         var c = __instance.DestinationPos.ToIntVec3();
 
         var m = __instance.Map;
-        if(!c.Roofed(m))
+        if (!c.Roofed(m))
         {
             return true;
         }
 
         // (Blame Thathitmann) only does roof collapse if it's not the devourer leap or fleshbeast explosion
-        if(__instance.def != ThingDefOf.PawnFlyer_Stun && __instance.def != ThingDefOf.PawnFlyer_ConsumeLeap)
+        if (__instance.def != ThingDefOf.PawnFlyer_Stun && __instance.def != ThingDefOf.PawnFlyer_ConsumeLeap)
         {
             RoofCollapserImmediate.DropRoofInCells(c, m);
         }

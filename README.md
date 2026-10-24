@@ -5,6 +5,8 @@
 Update of YAYOs mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2242175972
 
+- From 1.6 this mod no longer needs HugsLib, thanks to Zaljerem!
+
 ![Image](https://img.litet.net/logos/Notice.png)
 	
 ![Image](https://img.litet.net/logos/OriginalDescription.png)
@@ -46,4 +48,4 @@ If you are proficient in C# and are interested, please contact me on the rimworl
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/BetterJumpPack?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2565740103) | tags:  mountain jumping
+[![Image](https://img.shields.io/github/v/release/emipa606/BetterJumpPack?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2565740103) | mountain jumping
